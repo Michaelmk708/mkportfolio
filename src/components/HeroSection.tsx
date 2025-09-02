@@ -5,7 +5,7 @@ import { CyberGrid } from './CyberGrid';
 import { Button } from './ui/button';
 import { ChevronDown } from 'lucide-react';
 import heroBackground from '@/assets/cyber-hero-bg.jpg';
-import profilePhoto from '@/assets/profile-photo.jpg';
+import profilePhoto from '@/assets/profile.jpeg';
 
 export const HeroSection: React.FC = () => {
   const [showTitle, setShowTitle] = useState(false);
@@ -76,8 +76,9 @@ export const HeroSection: React.FC = () => {
                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-cyber-cyan shadow-[0_0_40px_theme(colors.cyber.cyan)] overflow-hidden">
                   <img 
                     src={profilePhoto} 
-                    alt="Alex Chen - Software & Cybersecurity Engineer"
+                    alt="michael kinuthia - Software & Cybersecurity Engineer"
                     className="w-full h-full object-cover"
+                    style={{ objectPosition: 'left center' }}
                   />
                 </div>
                 <motion.div 
@@ -93,7 +94,7 @@ export const HeroSection: React.FC = () => {
                   &gt; Identifying user...
                 </div>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold glow-green mb-2">
-                  ALEX CHEN
+                  MICHAEL KINUTHIA
                 </h1>
                 <div className="font-mono text-cyber-purple text-sm md:text-base">
                   [USER_ID: 0x7A3F9C2E] [ACCESS_LEVEL: ROOT]
@@ -108,12 +109,12 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="glow-cyan block mb-2">CYBER</span>
-                <span className="glow-purple">ENGINEER</span>
+                <span className="glow-cyan block mb-2">FULLSTACK</span>
+                <span className="glow-purple">DEVELOPER</span>
               </h2>
               <div className="glow-green text-xl md:text-2xl lg:text-3xl font-mono">
                 <TypingEffect 
-                  text="Software & Cybersecurity Engineer"
+                  text="Full-Stack Dev | Web3 Architect | Security Enthusiast"
                   speed={100}
                   onComplete={() => setShowSubtitle(true)}
                 />
@@ -188,13 +189,13 @@ export const HeroSection: React.FC = () => {
           <div className="w-3 h-3 rounded-full bg-destructive"></div>
           <div className="w-3 h-3 rounded-full bg-cyber-orange"></div>
           <div className="w-3 h-3 rounded-full bg-cyber-green"></div>
-          <span className="ml-2">root@cyberport:~$</span>
+          <span className="ml-2">root@m1k3:~$</span>
         </div>
         <div className="space-y-1 text-cyber-green">
           <div>System Status: ONLINE</div>
           <div>Security Level: MAXIMUM</div>
           <div>Access Mode: AUTHORIZED</div>
-          <div>Location: CYBERSPACE</div>
+          <div>Location: NYERI</div>
         </div>
       </motion.div>
     </section>

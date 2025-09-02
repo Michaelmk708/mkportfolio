@@ -20,24 +20,24 @@ export const ContactSection: React.FC = () => {
 
   const executeCommand = (command: string) => {
     const cmd = command.toLowerCase().trim();
-    setTerminalHistory(prev => [...prev, `guest@cyberport:~$ ${command}`]);
+    setTerminalHistory(prev => [...prev, `guest@m1k3:~$ ${command}`]);
     
     switch (cmd) {
       case 'github':
         setTerminalHistory(prev => [...prev, 'Opening GitHub profile...']);
-        setTimeout(() => window.open('https://github.com', '_blank'), 500);
+        setTimeout(() => window.open('https://github.com/Michaelmk708', '_blank'), 500);
         break;
       case 'linkedin':
         setTerminalHistory(prev => [...prev, 'Opening LinkedIn profile...']);
-        setTimeout(() => window.open('https://linkedin.com', '_blank'), 500);
+        setTimeout(() => window.open('https://www.linkedin.com/in/michaelmk708', '_blank'), 500);
         break;
       case 'email':
         setTerminalHistory(prev => [...prev, 'Opening email client...']);
-        setTimeout(() => window.open('mailto:contact@cyberport.dev', '_blank'), 500);
+        setTimeout(() => window.open('mailto:michaelkinuthia708@gmail.com', '_blank'), 500);
         break;
       case 'discord':
         setTerminalHistory(prev => [...prev, 'Opening Discord...']);
-        setTimeout(() => window.open('https://discord.com', '_blank'), 500);
+        setTimeout(() => window.open('https://discord.com/users/1387770275432628234', '_blank'), 500);
         break;
       case 'help':
       case 'connect --help':
@@ -73,28 +73,28 @@ export const ContactSection: React.FC = () => {
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com',
+      url: 'https://github.com/Michaelmk708',
       description: 'Open source contributions',
       color: 'cyber-green'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://linkedin.com',
+      url: 'https://www.linkedin.com/in/michaelmk708',
       description: 'Professional network',
       color: 'cyber-cyan'
     },
     {
       name: 'Email',
       icon: Mail,
-      url: 'mailto:contact@cyberport.dev',
+      url: 'mailto:michaelkinuthia708@gmail.com',
       description: 'Direct communication',
       color: 'cyber-purple'
     },
     {
       name: 'Discord',
       icon: MessageSquare,
-      url: 'https://discord.com',
+      url: 'https://discord.com/users/1387770275432628234',
       description: 'Community chat',
       color: 'cyber-pink'
     }
@@ -120,7 +120,7 @@ export const ContactSection: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-cyber-orange"></div>
                 <div className="w-3 h-3 rounded-full bg-cyber-green"></div>
               </div>
-              <span className="font-mono text-terminal-prompt">root@cyberport:~$</span>
+              <span className="font-mono text-terminal-prompt">root@m1k3:~$</span>
               <span className="font-mono text-terminal-text">ssh secure-connect</span>
             </div>
             
@@ -250,7 +250,7 @@ export const ContactSection: React.FC = () => {
             
             {/* Terminal Input */}
             <div className="flex items-center gap-3">
-              <span className="font-mono text-terminal-prompt">guest@cyberport:~$</span>
+              <span className="font-mono text-terminal-prompt">guest@m1k3:~$</span>
               <input
                 type="text"
                 value={terminalInput}
@@ -278,10 +278,10 @@ export const ContactSection: React.FC = () => {
           className="text-center mt-16 pt-8 border-t border-cyber-cyan/30"
         >
           <p className="text-muted-foreground font-mono text-sm">
-            © 2024 CyberPort. All rights reserved. | Built with React + Three.js
+            © 2025 mkportfolio. All rights reserved. | Built with React + Three.js
           </p>
           <p className="text-cyber-cyan font-mono text-xs mt-2">
-            "In cyberspace, we trust in code"
+            "Crafting the future of Web & Web3"
           </p>
         </motion.div>
       </div>

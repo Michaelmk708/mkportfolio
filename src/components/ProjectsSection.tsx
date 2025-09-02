@@ -18,41 +18,69 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'DeFi Portfolio Tracker',
-    description: 'Real-time Web3 portfolio tracking with advanced analytics and multi-chain support.',
-    tech: ['React', 'Web3.js', 'Solidity', 'Node.js'],
+    title: 'PersonaPulse – Decentralized Identity & Reputation Platform',
+    description: 'A Web3 platform on the Internet Computer that empowers users to own their identity, manage verified profiles, and build trusted reputations across ecosystems.',
+    tech: ['React', 'Web3.js', 'ICP', 'rust'],
     category: 'Web3 dApps',
     status: 'encrypted',
     icon: Zap,
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://demo.com'
+    githubUrl: 'https://github.com/Michaelmk708/persona-web-icp',
+    liveUrl: 'https://personaportable.netlify.app/'
   },
   {
     id: 2,
-    title: 'Smart Contract Auditor',
-    description: 'Automated security analysis tool for Ethereum smart contracts with vulnerability detection.',
-    tech: ['Python', 'Solidity', 'Docker', 'FastAPI'],
-    category: 'Security Tools',
+    title: ' Arcadia: A Secure Messenger',
+    description: 'A proof-of-concept for end-to-end encrypted chat, demonstrating the power of Rust for robust backend logic and React for a responsive user interface.',
+    tech: ['React', 'Rust', 'JavaScript', 'Web Crypto API'],
+    category: 'Web3 dApps',
     status: 'encrypted',
-    icon: Shield
+    icon: Shield,
+    githubUrl: 'https://github.com/Michaelmk708/chatapp',
+    liveUrl: 'https://chatapparcadia.netlify.app/'
   },
   {
-    id: 3,
-    title: 'Decentralized Chat Protocol',
-    description: 'End-to-end encrypted messaging system built on blockchain with zero-knowledge proofs.',
-    tech: ['Rust', 'ICP', 'React', 'WebRTC'],
-    category: 'Smart Contracts',
-    status: 'encrypted',
-    icon: Lock
-  },
-  {
-    id: 4,
-    title: 'CyberSec Dashboard',
-    description: 'Real-time security monitoring platform with threat intelligence and incident response.',
-    tech: ['Django', 'React', 'PostgreSQL', 'Redis'],
+    id: 5,
+    title: 'E-commerce Dashboard',
+    description: 'A comprehensive e-commerce dashboard with real-time analytics, inventory management, and customer insights.',
+    tech: ['React', 'Node.js', 'MongoDB'],
     category: 'Full-Stack Apps',
     status: 'encrypted',
-    icon: Code
+    icon: Code,
+    githubUrl: 'https://github.com/Michaelmk708/ecommerce',
+    liveUrl: 'https://mkportifolio.netlify.app/assets/eshop'
+  },
+  {
+    id: 6,
+    title: 'Vulnerability Scanner',
+    description: 'A web application vulnerability scanner that identifies common security issues in websites and web apps.',
+    tech: ['Python', 'Django', 'Security'],
+    category: 'Security Tools',
+    status: 'encrypted',
+    icon: Shield,
+    githubUrl: 'https://github.com/Michaelmk708/security',
+    liveUrl: 'https://mkportifolio.netlify.app/assets/security'
+  },
+  {
+    id: 7,
+    title: 'Fitness App Design',
+    description: 'A modern fitness application design with workout tracking, nutrition planning, and community features.',
+    tech: ['Figma', 'Adobe XD', 'Prototyping'],
+    category: 'UI/UX Design',
+    status: 'encrypted',
+    icon: Zap,
+    githubUrl: 'https://github.com/Michaelmk708/fitness',
+    liveUrl: 'https://mkportifolio.netlify.app/assets/fitness'
+  },
+  {
+    id: 8,
+    title: 'Banking App Redesign',
+    description: 'A complete redesign of a banking mobile application focusing on usability and modern aesthetics.',
+    tech: ['Figma', 'User Research', 'Prototyping'],
+    category: 'UI/UX Design',
+    status: 'encrypted',
+    icon: Zap,
+    githubUrl: 'https://github.com/Michaelmk708/banking',
+    liveUrl: 'https://mkportifolio.netlify.app/assets/banking'
   }
 ];
 
@@ -99,7 +127,7 @@ export const ProjectsSection: React.FC = () => {
             
             <div className="font-mono text-terminal-text space-y-1">
               <div className="text-cyber-cyan">Scanning project directory...</div>
-              <div className="text-cyber-green">4 encrypted files found</div>
+              <div className="text-cyber-green">6 encrypted files found</div>
               <div className="text-cyber-purple">Access level: AUTHORIZED</div>
               <div className="text-foreground mt-2">Click to decrypt project files</div>
             </div>
@@ -181,15 +209,35 @@ export const ProjectsSection: React.FC = () => {
                     
                     <div className="flex gap-3">
                       {project.githubUrl && (
-                        <Button variant="ghost_glow" size="sm">
-                          <Github className="w-4 h-4 mr-2" />
-                          Code
+                        <Button
+                          variant="ghost_glow"
+                          size="sm"
+                          asChild
+                        >
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Github className="w-4 h-4 mr-2" />
+                            Code
+                          </a>
                         </Button>
                       )}
                       {project.liveUrl && (
-                        <Button variant="ghost_glow" size="sm">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
+                        <Button
+                          variant="ghost_glow"
+                          size="sm"
+                          asChild
+                        >
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Live Demo
+                          </a>
                         </Button>
                       )}
                     </div>
@@ -219,7 +267,7 @@ export const ProjectsSection: React.FC = () => {
           className="mt-16 terminal-border bg-terminal-bg p-6 rounded-lg max-w-2xl mx-auto"
         >
           <div className="font-mono text-terminal-text text-center space-y-2">
-            <div className="text-cyber-cyan">Projects decrypted: {decryptedProjects.size}/4</div>
+            <div className="text-cyber-cyan">Projects decrypted: {decryptedProjects.size}/6</div>
             <div className="text-cyber-green">Security clearance: MAXIMUM</div>
             <div className="text-cyber-purple">More classified projects available on request</div>
           </div>

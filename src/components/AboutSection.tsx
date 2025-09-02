@@ -9,7 +9,8 @@ export const AboutSection: React.FC = () => {
     { name: 'Solidity/Web3', level: 88, color: 'cyber-purple' },
     { name: 'Rust/ICP', level: 85, color: 'cyber-pink' },
     { name: 'Cybersecurity', level: 90, color: 'cyber-orange' },
-    { name: 'UI/UX Design', level: 87, color: 'cyber-cyan' }
+    { name: 'UI/UX Design', level: 87, color: 'cyber-cyan' },
+    { name: 'Databases (SQL/NoSQL)', level: 89, color: 'cyber-green' }
   ];
 
   const expertise = [
@@ -59,7 +60,7 @@ export const AboutSection: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-cyber-orange"></div>
                 <div className="w-3 h-3 rounded-full bg-cyber-green"></div>
               </div>
-              <span className="font-mono text-terminal-prompt">root@cyberport:~$</span>
+              <span className="font-mono text-terminal-prompt">root@m1k3:~$</span>
               <span className="font-mono text-terminal-text">whoami</span>
             </div>
             
@@ -67,7 +68,7 @@ export const AboutSection: React.FC = () => {
               <div className="text-cyber-cyan">USER: Software & Cybersecurity Engineer</div>
               <div className="text-cyber-green">ROLE: Full-Stack Developer | Security Specialist</div>
               <div className="text-cyber-purple">SPECIALIZATION: Web3 | Blockchain | UI/UX</div>
-              <div className="text-cyber-pink">LOCATION: Cyberspace</div>
+              <div className="text-cyber-pink">LOCATION: Nyeri</div>
               <div className="text-cyber-orange">STATUS: Available for projects</div>
               <div className="mt-4 text-foreground">
                 Passionate about building secure, scalable applications that bridge the gap between 
