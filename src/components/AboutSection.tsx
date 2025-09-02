@@ -67,7 +67,7 @@ export const AboutSection: React.FC = () => {
             <div className="font-mono text-terminal-text space-y-2">
               <div className="text-cyber-cyan">USER: Software & Cybersecurity Engineer</div>
               <div className="text-cyber-green">ROLE: Full-Stack Developer | Security Specialist</div>
-              <div className="text-cyber-purple">SPECIALIZATION: Web3 | Blockchain | UI/UX</div>
+              <div className="text-cyber-purple">SPECIALIZATION: Web2 | Web3 | Blockchain | UI/UX</div>
               <div className="text-cyber-pink">LOCATION: Nyeri</div>
               <div className="text-cyber-orange">STATUS: Available for projects</div>
               <div className="mt-4 text-foreground">

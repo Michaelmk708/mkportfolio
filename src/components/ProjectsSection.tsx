@@ -121,7 +121,7 @@ export const ProjectsSection: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-cyber-orange"></div>
                 <div className="w-3 h-3 rounded-full bg-cyber-green"></div>
               </div>
-              <span className="font-mono text-terminal-prompt">root@cyberport:~$</span>
+              <span className="font-mono text-terminal-prompt">root@m1k3:~$</span>
               <span className="font-mono text-terminal-text">ls -la /projects</span>
             </div>
             
