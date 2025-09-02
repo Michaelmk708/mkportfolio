@@ -22,8 +22,7 @@ export const HeroSection: React.FC = () => {
       {/* Animated grid overlay */}
       <div className="absolute inset-0 cyber-grid opacity-20" />
       
-      {/* 3D Background */}
-      <CyberGrid />
+      {/* 3D Background is now global */}
       
       {/* Scanning line effect */}
       <motion.div

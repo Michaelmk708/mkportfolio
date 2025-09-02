@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
 import { ContactSection } from '@/components/ContactSection';
+import { CyberGrid } from '@/components/CyberGrid';
 
 const Index = () => {
   useEffect(() => {
@@ -21,7 +22,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative">
+      {/* Global 3D Background */}
+      <CyberGrid />
+      
       {/* Navigation could be added here */}
       
       {/* Main sections */}

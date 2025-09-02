@@ -75,9 +75,7 @@ export const ProjectsSection: React.FC = () => {
 
   return (
     <section className="relative py-20 px-6" id="projects">
-      {/* Background effects */}
-      <div className="absolute inset-0 matrix-bg opacity-20" />
-      <div className="absolute inset-0 cyber-grid opacity-10" />
+      {/* Background effects (3D grid is global) */}
       
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Terminal header */}
