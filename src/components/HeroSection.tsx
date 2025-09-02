@@ -50,7 +50,7 @@ export const HeroSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Main title */}
+        {/* Main title with name */}
         {showTitle && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -58,17 +58,42 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="mb-6"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-              <span className="glow-cyan block mb-2">CYBER</span>
-              <span className="glow-purple">ENGINEER</span>
-            </h1>
-            <div className="glow-green text-xl md:text-2xl lg:text-3xl font-mono">
-              <TypingEffect 
-                text="Software & Cybersecurity Engineer"
-                speed={100}
-                onComplete={() => setShowSubtitle(true)}
-              />
-            </div>
+            {/* Name Section */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="mb-8"
+            >
+              <div className="font-mono text-cyber-cyan text-lg md:text-xl mb-2">
+                &gt; Identifying user...
+              </div>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold glow-green mb-2">
+                ALEX CHEN
+              </h1>
+              <div className="font-mono text-cyber-purple text-sm md:text-base">
+                [USER_ID: 0x7A3F9C2E] [ACCESS_LEVEL: ROOT]
+              </div>
+            </motion.div>
+
+            {/* Title Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <span className="glow-cyan block mb-2">CYBER</span>
+                <span className="glow-purple">ENGINEER</span>
+              </h2>
+              <div className="glow-green text-xl md:text-2xl lg:text-3xl font-mono">
+                <TypingEffect 
+                  text="Software & Cybersecurity Engineer"
+                  speed={100}
+                  onComplete={() => setShowSubtitle(true)}
+                />
+              </div>
+            </motion.div>
           </motion.div>
         )}
 
