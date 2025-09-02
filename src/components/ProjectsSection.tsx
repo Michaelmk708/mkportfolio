@@ -47,7 +47,7 @@ const projects: Project[] = [
     status: 'encrypted',
     icon: Code,
     githubUrl: 'https://github.com/Michaelmk708/ecommerce',
-    liveUrl: 'https://mkportifolio.netlify.app/assets/eshop'
+    liveUrl: '/assets/eshop.html'
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ const projects: Project[] = [
     status: 'encrypted',
     icon: Shield,
     githubUrl: 'https://github.com/Michaelmk708/security',
-    liveUrl: 'https://mkportifolio.netlify.app/assets/security'
+    liveUrl: '/assets/security.html'
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ const projects: Project[] = [
     status: 'encrypted',
     icon: Zap,
     githubUrl: 'https://github.com/Michaelmk708/fitness',
-    liveUrl: 'https://mkportifolio.netlify.app/assets/fitness'
+    liveUrl: '/assets/fitness.html'
   },
   {
     id: 8,
@@ -80,7 +80,7 @@ const projects: Project[] = [
     status: 'encrypted',
     icon: Zap,
     githubUrl: 'https://github.com/Michaelmk708/banking',
-    liveUrl: 'https://mkportifolio.netlify.app/assets/banking'
+    liveUrl: '/assets/banking.html'
   }
 ];
 

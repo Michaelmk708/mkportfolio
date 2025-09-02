@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoBank - Modern Banking Redesign</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .card-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-active {
+            color: #3b82f6;
+            position: relative;
+        }
+        
+        .nav-active:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+        
+        .transaction-in {
+            border-left: 4px solid #10b981;
+        }
+        
+        .transaction-out {
+            border-left: 4px solid #ef4444;
+        }
+        
+        .skeleton {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            background-color: #e2e8f0;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .wave-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H60V0h-5.373zm-5.373 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H60V0h-10.746zm-5.373 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H60V0h-16.12zm-5.374 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H60V0h-21.493zM0 0v59.254h5.373c-.622-.828-1.01-1.508-1.373-2.348-.363-.84-.689-1.843-.984-3.01-.295-1.167-.545-2.476-.75-3.928-.205-1.452-.364-3.047-.477-4.785-.113-1.738-.17-3.618-.17-5.64V21.427c0-2.022.057-3.902.17-5.64.113-1.738.272-3.333.477-4.785.205-1.452.455-2.761.75-3.928.295-1.167.621-2.17.984-3.01C4.363 1.508 4.751.828 5.373 0H0zm5.373 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H10.12V0H5.373zm5.373 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H16.12V0h-5.374zm5.373 0c.622.828 1.01 1.508 1.373 2.348.363.84.689 1.843.984 3.01.295 1.167.545 2.476.75 3.928.205 1.452.364 3.047.477 4.785.113 1.738.17 3.618.17 5.64v15.556c0 2.022-.057 3.902-.17 5.64-.113 1.738-.272 3.333-.477 4.785-.205 1.452-.455 2.761-.75 3.928-.295 1.167-.621 2.17-.984 3.01-.363.84-.751 1.52-1.373 2.348H21.493V0h-5.373z' fill='%233b82f6' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="max-w-md mx-auto bg-gray-50">
+    <!-- App Header -->
+    <header class="sticky top-0 z-10 bg-white p-4 shadow-sm">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <span class="text-blue-600 font-semibold">JD</span>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Good morning</p>
+                    <h1 class="font-semibold">mike anderson</h1>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="far fa-bell text-xl"></i>
+                </button>
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Account Balance Card -->
+        <div class="mx-4 mt-6 mb-8">
+            <div class="card-gradient rounded-2xl p-6 text-white card-shadow">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <p class="text-sm opacity-80">Current Balance</p>
+                        <h2 class="text-3xl font-bold">12,458.50 KES</h2>
+                    </div>
+                    <button class="bg-white bg-opacity-20 p-2 rounded-full">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-xs opacity-80">**** **** **** 4582</p>
+                        <p class="text-xs opacity-80">08/25</p>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1200px-Mastercard_2019_logo.svg.png" alt="Mastercard" class="h-8">
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mx-4 mb-8">
+            <h2 class="text-lg font-semibold mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-4 gap-3">
+                <button class="bg-white rounded-xl p-3 flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <span class="text-xs font-medium">Transfer</span>
+                </button>
+                <button class="bg-white rounded-xl p-3 flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-2">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <span class="text-xs font-medium">Pay Bills</span>
+                </button>
+                <button class="bg-white rounded-xl p-3 flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <span class="text-xs font-medium">Scan QR</span>
+                </button>
+                <button class="bg-white rounded-xl p-3 flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-2">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="text-xs font-medium">More</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="mx-4 mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">Recent Transactions</h2>
+                <button class="text-blue-600 text-sm font-medium">See All</button>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="divide-y divide-gray-100">
+                    <!-- Transaction Item -->
+                    <div class="p-4 transaction-in hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">Salary Deposit</h3>
+                                    <span class="font-medium text-green-600">+4,500.00 KES</span>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>Company Inc.</span>
+                                    <span>Today, 9:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transaction Item -->
+                    <div class="p-4 transaction-out hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">Dinner</h3>
+                                    <span class="font-medium text-red-600">-85.50 KES</span>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>Restaurant</span>
+                                    <span>Yesterday, 7:30 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transaction Item -->
+                    <div class="p-4 transaction-out hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">Online Shopping</h3>
+                                    <span class="font-medium text-red-600">-245.99 KES</span>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>Amazon</span>
+                                    <span>Yesterday, 2:15 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transaction Item -->
+                    <div class="p-4 transaction-in hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">Money Received</h3>
+                                    <span class="font-medium text-green-600">+120.00 KES</span>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>From Sarah</span>
+                                    <span>Mar 15, 11:20 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Savings Goals -->
+        <div class="mx-4 mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">Savings Goals</h2>
+                <button class="text-blue-600 text-sm font-medium">View All</button>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-4">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mr-3">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">New House</h3>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                            <div class="bg-indigo-600 h-2 rounded-full" style="width: 45%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>45,000 KES saved</span>
+                            <span>100,000 KES goal</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mr-3">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">New Car</h3>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 72%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>14,400 KES saved</span>
+                            <span>20,000 KES goal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotions -->
+        <div class="mx-4">
+            <h2 class="text-lg font-semibold mb-4">Special Offers</h2>
+            
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="wave-pattern p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="inline-block bg-blue-100 text-blue-600 text-xs font-medium px-2 py-1 rounded-full mb-2">Limited Time</span>
+                            <h3 class="font-bold text-lg mb-1">Get 5% Cashback</h3>
+                            <p class="text-sm text-gray-600 mb-3">On all grocery purchases this month</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg">
+                                Activate Now
+                            </button>
+                        </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Cashback" class="h-20">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-3 px-4">
+        <a href="#" class="flex flex-col items-center text-blue-600 nav-active">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500 hover:text-blue-600">
+            <i class="fas fa-chart-pie text-xl"></i>
+            <span class="text-xs mt-1">Stats</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500 hover:text-blue-600">
+            <div class="bg-blue-600 text-white rounded-full p-3 -mt-8 shadow-lg">
+                <i class="fas fa-plus text-xl"></i>
+            </div>
+            <span class="text-xs mt-3">Pay</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500 hover:text-blue-600">
+            <i class="fas fa-credit-card text-xl"></i>
+            <span class="text-xs mt-1">Cards</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500 hover:text-blue-600">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">Profile</span>
+        </a>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate loading animation
+            const transactions = document.querySelectorAll('.transaction-in, .transaction-out');
+            
+            transactions.forEach((transaction, index) => {
+                setTimeout(() => {
+                    transaction.classList.remove('skeleton');
+                }, index * 200);
+            });
+            
+            // Add ripple effect to buttons
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                });
+            });
+            
+            // Navigation active state
+            const navItems = document.querySelectorAll('nav a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(nav => nav.classList.remove('nav-active', 'text-blue-600'));
+                    navItems.forEach(nav => nav.classList.add('text-gray-500'));
+                    this.classList.add('nav-active', 'text-blue-600');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

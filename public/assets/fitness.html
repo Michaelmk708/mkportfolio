@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Pro - Modern Fitness App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+        }
+        
+        .workout-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .workout-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.5s ease;
+            transform-origin: 50% 50%;
+        }
+        
+        .nutrition-card {
+            border-left: 4px solid;
+        }
+        
+        .nutrition-protein {
+            border-left-color: #3b82f6;
+        }
+        
+        .nutrition-carbs {
+            border-left-color: #10b981;
+        }
+        
+        .nutrition-fat {
+            border-left-color: #f59e0b;
+        }
+        
+        .active-tab {
+            position: relative;
+            color: #3b82f6;
+        }
+        
+        .active-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #3b82f6;
+            border-radius: 3px;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating-action-button {
+            box-shadow: 0 10px 15px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Main App Container -->
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="gradient-bg px-6 py-4 text-white">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-dumbbell text-2xl"></i>
+                    <h1 class="text-xl font-bold">FitTrack Pro</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full bg-white bg-opacity-20">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="p-2 rounded-full bg-white bg-opacity-20">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <h2 class="text-lg font-medium">Hello, Alex!</h2>
+                <p class="text-sm opacity-90">Ready for your workout today?</p>
+            </div>
+            
+            <div class="mt-6 bg-white bg-opacity-20 rounded-xl p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs opacity-90">Current Streak</p>
+                        <h3 class="text-xl font-bold">7 days</h3>
+                    </div>
+                    <div>
+                        <p class="text-xs opacity-90">Today's Goal</p>
+                        <div class="flex items-center">
+                            <svg class="w-12 h-12" viewBox="0 0 42 42">
+                                <circle class="text-white opacity-20" cx="21" cy="21" r="15.9155" fill="none" stroke-width="3"></circle>
+                                <circle class="progress-ring-circle text-white" cx="21" cy="21" r="15.9155" fill="none" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="40"></circle>
+                            </svg>
+                            <span class="ml-2 text-lg font-bold">60%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="px-6 py-4">
+            <!-- Tab Navigation -->
+            <div class="flex justify-between border-b border-gray-200 pb-2">
+                <button class="active-tab font-medium text-sm px-2 py-1">Workouts</button>
+                <button class="font-medium text-gray-500 text-sm px-2 py-1">Nutrition</button>
+                <button class="font-medium text-gray-500 text-sm px-2 py-1">Community</button>
+                <button class="font-medium text-gray-500 text-sm px-2 py-1">Progress</button>
+            </div>
+            
+            <!-- Today's Workout -->
+            <div class="mt-6">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-lg">Today's Workout</h3>
+                    <button class="text-blue-500 text-sm font-medium">View All</button>
+                </div>
+                
+                <div class="mt-4 workout-card rounded-xl overflow-hidden bg-white shadow-sm">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=150&q=80" alt="Workout" class="w-full h-32 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <h4 class="text-white font-bold">Full Body HIIT</h4>
+                            <p class="text-white text-xs opacity-90">45 min • 320 kcal</p>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-white bg-opacity-90 rounded-full px-2 py-1 flex items-center">
+                            <i class="fas fa-bolt text-yellow-500 text-xs"></i>
+                            <span class="ml-1 text-xs font-medium">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-play text-blue-500 text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium">Start Now</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-heart text-gray-300 text-sm"></i>
+                                    <span class="ml-1 text-xs">24</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-comment text-gray-300 text-sm"></i>
+                                    <span class="ml-1 text-xs">8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommended Workouts -->
+            <div class="mt-8">
+                <h3 class="font-bold text-lg">Recommended For You</h3>
+                
+                <div class="mt-4 grid grid-cols-2 gap-3">
+                    <div class="workout-card rounded-lg overflow-hidden bg-white shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=100&q=80" alt="Workout" class="w-full h-20 object-cover">
+                        <div class="p-3">
+                            <h4 class="font-medium text-sm">Yoga Flow</h4>
+                            <p class="text-xs text-gray-500 mt-1">30 min • 180 kcal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-card rounded-lg overflow-hidden bg-white shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c95595945cef?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=100&q=80" alt="Workout" class="w-full h-20 object-cover">
+                        <div class="p-3">
+                            <h4 class="font-medium text-sm">Strength Training</h4>
+                            <p class="text-xs text-gray-500 mt-1">50 min • 380 kcal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-card rounded-lg overflow-hidden bg-white shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=100&q=80" alt="Workout" class="w-full h-20 object-cover">
+                        <div class="p-3">
+                            <h4 class="font-medium text-sm">Running</h4>
+                            <p class="text-xs text-gray-500 mt-1">45 min • 450 kcal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-card rounded-lg overflow-hidden bg-white shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=100&q=80" alt="Workout" class="w-full h-20 object-cover">
+                        <div class="p-3">
+                            <h4 class="font-medium text-sm">Pilates</h4>
+                            <p class="text-xs text-gray-500 mt-1">40 min • 220 kcal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nutrition Overview -->
+            <div class="mt-8">
+                <h3 class="font-bold text-lg">Today's Nutrition</h3>
+                
+                <div class="mt-4 bg-white rounded-xl p-4 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h4 class="font-medium">1,850 / 2,200 kcal</h4>
+                            <p class="text-xs text-gray-500">Remaining: 350 kcal</p>
+                        </div>
+                        <div class="w-12 h-12">
+                            <svg viewBox="0 0 42 42">
+                                <circle class="text-gray-200" cx="21" cy="21" r="15.9155" fill="none" stroke-width="3"></circle>
+                                <circle class="progress-ring-circle text-blue-500" cx="21" cy="21" r="15.9155" fill="none" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="16"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-3 mt-4">
+                        <div class="nutrition-card nutrition-protein p-3 rounded bg-white">
+                            <p class="text-xs text-gray-500">Protein</p>
+                            <h5 class="font-bold">112g</h5>
+                            <div class="mt-2 w-full bg-gray-200 rounded-full h-1">
+                                <div class="bg-blue-500 h-1 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="nutrition-card nutrition-carbs p-3 rounded bg-white">
+                            <p class="text-xs text-gray-500">Carbs</p>
+                            <h5 class="font-bold">245g</h5>
+                            <div class="mt-2 w-full bg-gray-200 rounded-full h-1">
+                                <div class="bg-green-500 h-1 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="nutrition-card nutrition-fat p-3 rounded bg-white">
+                            <p class="text-xs text-gray-500">Fat</p>
+                            <h5 class="font-bold">58g</h5>
+                            <div class="mt-2 w-full bg-gray-200 rounded-full h-1">
+                                <div class="bg-yellow-500 h-1 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="mt-4 w-full py-2 bg-blue-50 text-blue-500 rounded-lg text-sm font-medium">
+                        Log Meal
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Community Highlights -->
+            <div class="mt-8">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-lg">Community</h3>
+                    <button class="text-blue-500 text-sm font-medium">See All</button>
+                </div>
+                
+                <div class="mt-4 space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&h=40&q=80" alt="User" class="w-10 h-10 rounded-full">
+                        <div class="flex-1 bg-white p-3 rounded-lg shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-medium text-sm">Sarah Johnson</h4>
+                                <span class="text-xs text-gray-500">2h ago</span>
+                            </div>
+                            <p class="text-sm mt-1">Just completed a 5K run in 22 minutes! New personal best 🎉 #running #fitness</p>
+                            <div class="flex items-center mt-3 space-x-4">
+                                <button class="flex items-center text-gray-500 text-xs">
+                                    <i class="far fa-heart mr-1"></i> 24
+                                </button>
+                                <button class="flex items-center text-gray-500 text-xs">
+                                    <i class="far fa-comment mr-1"></i> 8
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-3">
+                        <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&h=40&q=80" alt="User" class="w-10 h-10 rounded-full">
+                        <div class="flex-1 bg-white p-3 rounded-lg shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-medium text-sm">Mike Chen</h4>
+                                <span class="text-xs text-gray-500">5h ago</span>
+                            </div>
+                            <p class="text-sm mt-1">30-day pushup challenge completed! Went from 20 to 50 pushups in a row 💪 #progress #strength</p>
+                            <div class="flex items-center mt-3 space-x-4">
+                                <button class="flex items-center text-gray-500 text-xs">
+                                    <i class="far fa-heart mr-1"></i> 42
+                                </button>
+                                <button class="flex items-center text-gray-500 text-xs">
+                                    <i class="far fa-comment mr-1"></i> 15
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around py-3 px-6">
+            <button class="text-blue-500 flex flex-col items-center">
+                <i class="fas fa-home"></i>
+                <span class="text-xs mt-1">Home</span>
+            </button>
+            <button class="text-gray-500 flex flex-col items-center">
+                <i class="fas fa-chart-line"></i>
+                <span class="text-xs mt-1">Progress</span>
+            </button>
+            <button class="text-gray-500 flex flex-col items-center">
+                <i class="fas fa-utensils"></i>
+                <span class="text-xs mt-1">Nutrition</span>
+            </button>
+            <button class="text-gray-500 flex flex-col items-center">
+                <i class="fas fa-users"></i>
+                <span class="text-xs mt-1">Community</span>
+            </button>
+        </div>
+        
+        <!-- Floating Action Button -->
+        <button class="fixed bottom-20 right-6 w-14 h-14 rounded-full gradient-bg text-white flex items-center justify-center floating-action-button pulse-animation">
+            <i class="fas fa-plus text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        // Initialize progress rings
+        document.addEventListener('DOMContentLoaded', function() {
+            // Calculate circumference for progress rings
+            function setProgress(selector, percent) {
+                const circle = document.querySelector(selector);
+                const radius = circle.r.baseVal.value;
+                const circumference = 2 * Math.PI * radius;
+                const offset = circumference - (percent / 100) * circumference;
+                circle.style.strokeDasharray = circumference;
+                circle.style.strokeDashoffset = offset;
+            }
+            
+            // Set initial progress values
+            setProgress('.progress-ring-circle', 60);
+            setProgress('.progress-ring-circle:nth-of-type(2)', 84);
+            
+            // Simulate progress updates
+            setInterval(() => {
+                const randomProgress = Math.floor(Math.random() * 20) + 60;
+                setProgress('.progress-ring-circle', randomProgress);
+            }, 5000);
+            
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.flex.justify-between.border-b button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active-tab', 'text-blue-500'));
+                    tabs.forEach(t => t.classList.add('text-gray-500'));
+                    tab.classList.add('active-tab', 'text-blue-500');
+                    tab.classList.remove('text-gray-500');
+                });
+            });
+            
+            // Like button functionality
+            const likeButtons = document.querySelectorAll('.fa-heart');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas', 'text-red-500');
+                    } else {
+                        this.classList.remove('fas', 'text-red-500');
+                        this.classList.add('far');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

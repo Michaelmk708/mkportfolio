@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DjangoSec Scanner - Web Application Vulnerability Scanner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .critical-bg {
+            background-color: #fee2e2;
+        }
+        
+        .high-bg {
+            background-color: #ffedd5;
+        }
+        
+        .medium-bg {
+            background-color: #fef3c7;
+        }
+        
+        .low-bg {
+            background-color: #ecfccb;
+        }
+        
+        .info-bg {
+            background-color: #e0f2fe;
+        }
+        
+        .critical-text {
+            color: #dc2626;
+        }
+        
+        .high-text {
+            color: #ea580c;
+        }
+        
+        .medium-text {
+            color: #d97706;
+        }
+        
+        .low-text {
+            color: #65a30d;
+        }
+        
+        .info-text {
+            color: #0284c7;
+        }
+        
+        .severity-badge {
+            width: 80px;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            padding: 2px 8px;
+        }
+        
+        .scan-progress {
+            height: 4px;
+            background-color: #e5e7eb;
+            border-radius: 2px;
+        }
+        
+        .scan-progress-bar {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            transition: width 0.3s ease;
+        }
+        
+        .vulnerability-card {
+            transition: all 0.2s ease;
+            border-left: 4px solid;
+        }
+        
+        .vulnerability-card:hover {
+            transform: translateX(4px);
+        }
+        
+        .terminal-output {
+            background-color: #1e293b;
+            color: #f8fafc;
+            font-family: 'Fira Code', monospace;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .terminal-line {
+            padding: 2px 12px;
+            border-left: 2px solid transparent;
+        }
+        
+        .terminal-line.error {
+            border-left-color: #ef4444;
+        }
+        
+        .terminal-line.warning {
+            border-left-color: #f59e0b;
+        }
+        
+        .terminal-line.success {
+            border-left-color: #10b981;
+        }
+        
+        .terminal-line.info {
+            border-left-color: #3b82f6;
+        }
+        
+        .blink-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .tab-active {
+            position: relative;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
+                    <i class="fas fa-shield-alt text-white text-lg"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800">DjangoSec Scanner</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    <i class="fas fa-cog mr-2"></i> Settings
+                </button>
+                <button class="px-4 py-2 bg-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700">
+                    <i class="fas fa-user mr-2"></i> Account
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Panel - Scanner Controls -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Scan Configuration</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Target URL</label>
+                            <div class="flex">
+                                <input type="text" class="flex-1 rounded-l-lg border-r-0 border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="https://example.com">
+                                <button class="px-3 py-2 bg-blue-600 text-white rounded-r-lg text-sm font-medium hover:bg-blue-700">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Scan Type</label>
+                            <select class="w-full rounded-lg border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500">
+                                <option>Full Scan (Recommended)</option>
+                                <option>Quick Scan</option>
+                                <option>Django-Specific Scan</option>
+                                <option>OWASP Top 10</option>
+                                <option>Custom Scan</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Authentication</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input id="no-auth" name="auth-type" type="radio" class="h-4 w-4 text-blue-600 focus:ring-blue-500" checked>
+                                    <label for="no-auth" class="ml-2 block text-sm text-gray-700">No Authentication</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="basic-auth" name="auth-type" type="radio" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                    <label for="basic-auth" class="ml-2 block text-sm text-gray-700">Basic Auth</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="session-auth" name="auth-type" type="radio" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                    <label for="session-auth" class="ml-2 block text-sm text-gray-700">Session/Cookie</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button class="w-full py-3 bg-blue-600 rounded-lg text-white font-medium hover:bg-blue-700 flex items-center justify-center">
+                                <i class="fas fa-play mr-2"></i> Start Scan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Scans</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="text-sm font-medium">example.com</p>
+                                    <p class="text-xs text-gray-500">2 hours ago</p>
+                                </div>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="text-sm font-medium">testapp.local</p>
+                                    <p class="text-xs text-gray-500">Yesterday</p>
+                                </div>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Completed</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="text-sm font-medium">dev.djangoapp.com</p>
+                                    <p class="text-xs text-gray-500">3 days ago</p>
+                                </div>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Partial</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Scan Results -->
+            <div class="lg:col-span-2">
+                <!-- Scan Status Card -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Scan Status</h2>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">In Progress</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm text-gray-600 mb-1">
+                            <span>Scanning: https://djangoapp.example.com</span>
+                            <span>45% complete</span>
+                        </div>
+                        <div class="scan-progress w-full">
+                            <div class="scan-progress-bar" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-5 gap-2 text-center text-xs font-medium mb-4">
+                        <div class="p-2 critical-bg critical-text rounded">
+                            <div>Critical</div>
+                            <div class="text-lg">3</div>
+                        </div>
+                        <div class="p-2 high-bg high-text rounded">
+                            <div>High</div>
+                            <div class="text-lg">7</div>
+                        </div>
+                        <div class="p-2 medium-bg medium-text rounded">
+                            <div>Medium</div>
+                            <div class="text-lg">12</div>
+                        </div>
+                        <div class="p-2 low-bg low-text rounded">
+                            <div>Low</div>
+                            <div class="text-lg">5</div>
+                        </div>
+                        <div class="p-2 info-bg info-text rounded">
+                            <div>Info</div>
+                            <div class="text-lg">18</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                            <i class="fas fa-pause mr-2"></i> Pause
+                        </button>
+                        <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
+                            <i class="fas fa-stop mr-2"></i> Stop
+                        </button>
+                        <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 text-sm rounded-lg hover:bg-gray-50">
+                            <i class="fas fa-download mr-2"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Scan Results Tabs -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="border-b border-gray-200">
+                        <nav class="flex -mb-px px-6">
+                            <button class="tab-active mr-8 py-4 text-sm font-medium">Vulnerabilities</button>
+                            <button class="text-gray-500 mr-8 py-4 text-sm font-medium">Details</button>
+                            <button class="text-gray-500 mr-8 py-4 text-sm font-medium">Terminal</button>
+                            <button class="text-gray-500 py-4 text-sm font-medium">Recommendations</button>
+                        </nav>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Vulnerabilities Tab Content -->
+                        <div class="space-y-4">
+                            <!-- Django-Specific Vulnerabilities -->
+                            <div>
+                                <h3 class="font-medium text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-bug mr-2 text-red-500"></i> Django-Specific Issues
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="vulnerability-card critical-bg p-4 rounded-lg border-l-4 border-red-500">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <h4 class="font-medium">Django Debug Mode Enabled</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Debug mode exposes sensitive information and should never be enabled in production.</p>
+                                            </div>
+                                            <span class="severity-badge critical-bg critical-text">Critical</span>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-sm">
+                                            <span class="code-font bg-gray-100 px-2 py-1 rounded mr-3">DEBUG = True</span>
+                                            <span class="text-gray-500">Found in settings.py</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vulnerability-card high-bg p-4 rounded-lg border-l-4 border-orange-500">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <h4 class="font-medium">Missing CSRF Protection</h4>
+                                                <p class="text-sm text-gray-600 mt-1">CSRF middleware is not properly configured, leaving forms vulnerable to CSRF attacks.</p>
+                                            </div>
+                                            <span class="severity-badge high-bg high-text">High</span>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-sm">
+                                            <span class="code-font bg-gray-100 px-2 py-1 rounded mr-3">'django.middleware.csrf.CsrfViewMiddleware'</span>
+                                            <span class="text-gray-500">Missing from MIDDLEWARE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Common Web Vulnerabilities -->
+                            <div>
+                                <h3 class="font-medium text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-globe mr-2 text-blue-500"></i> Common Web Vulnerabilities
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="vulnerability-card high-bg p-4 rounded-lg border-l-4 border-orange-500">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <h4 class="font-medium">SQL Injection Vulnerability</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Raw SQL queries detected without proper parameterization in views.py.</p>
+                                            </div>
+                                            <span class="severity-badge high-bg high-text">High</span>
+                                        </div>
+                                        <div class="mt-3 text-sm code-font bg-gray-800 text-gray-100 p-2 rounded overflow-x-auto">
+                                            <span class="text-red-400">User.objects.raw(</span>"SELECT * FROM auth_user WHERE username = '" + request.GET['username'] + "'"<span class="text-red-400">)</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vulnerability-card medium-bg p-4 rounded-lg border-l-4 border-yellow-500">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <h4 class="font-medium">XSS Vulnerability</h4>
+                                                <p class="text-sm text-gray-600 mt-1">User input is directly rendered in templates without proper escaping.</p>
+                                            </div>
+                                            <span class="severity-badge medium-bg medium-text">Medium</span>
+                                        </div>
+                                        <div class="mt-3 text-sm code-font bg-gray-800 text-gray-100 p-2 rounded overflow-x-auto">
+                                            &lt;p&gt;{{ user_input }}&lt;/p&gt;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Security Misconfigurations -->
+                            <div>
+                                <h3 class="font-medium text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-cog mr-2 text-purple-500"></i> Security Misconfigurations
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="vulnerability-card medium-bg p-4 rounded-lg border-l-4 border-yellow-500">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <h4 class="font-medium">Insecure Cookie Settings</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Session cookies are missing Secure and HttpOnly flags.</p>
+                                            </div>
+                                            <span class="severity-badge medium-bg medium-text">Medium</span>
+                                        </div>
+                                        <div class="mt-3 text-sm code-font bg-gray-100 px-2 py-1 rounded">
+                                            SESSION_COOKIE_SECURE = False, SESSION_COOKIE_HTTPONLY = False
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vulnerability-card low-bg p-4 rounded-lg border-l-4 border-green-500">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <h4 class="font-medium">Exposed Admin Interface</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Django admin interface is accessible without additional protection.</p>
+                                            </div>
+                                            <span class="severity-badge low-bg low-text">Low</span>
+                                        </div>
+                                        <div class="mt-3 text-sm">
+                                            Consider adding IP restrictions or additional authentication for /admin/
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Terminal Tab Content (Hidden by default) -->
+                        <div class="hidden terminal-output rounded-lg">
+                            <div class="p-4 border-b border-gray-700 flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <span class="text-sm text-gray-400">DjangoSec Scanner v1.2.0</span>
+                            </div>
+                            <div class="p-4 h-64 overflow-y-auto">
+                                <div class="terminal-line success">
+                                    <span class="text-green-400">[✓]</span> Initializing scanner for: https://djangoapp.example.com
+                                </div>
+                                <div class="terminal-line info">
+                                    <span class="text-blue-400">[i]</span> Detected Django version: 3.2.12
+                                </div>
+                                <div class="terminal-line warning">
+                                    <span class="text-yellow-400">[!]</span> DEBUG mode is enabled (Critical)
+                                </div>
+                                <div class="terminal-line">
+                                    Checking for common Django misconfigurations...
+                                </div>
+                                <div class="terminal-line error">
+                                    <span class="text-red-400">[×]</span> CSRF middleware missing (High)
+                                </div>
+                                <div class="terminal-line">
+                                    Scanning for SQL injection vulnerabilities...
+                                </div>
+                                <div class="terminal-line error">
+                                    <span class="text-red-400">[×]</span> Raw SQL query detected in views.py (High)
+                                </div>
+                                <div class="terminal-line">
+                                    Checking cookie security settings...
+                                </div>
+                                <div class="terminal-line warning">
+                                    <span class="text-yellow-400">[!]</span> Missing Secure/HttpOnly flags (Medium)
+                                </div>
+                                <div class="terminal-line">
+                                    Scanning progress: 45% complete
+                                </div>
+                                <div class="terminal-line">
+                                    <span class="blink-cursor">_</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('nav button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active', 'text-blue-600'));
+                    tabs.forEach(t => t.classList.add('text-gray-500'));
+                    tab.classList.add('tab-active', 'text-blue-600');
+                    tab.classList.remove('text-gray-500');
+                });
+            });
+            
+            // Simulate scan progress
+            let progress = 45;
+            const progressBar = document.querySelector('.scan-progress-bar');
+            const progressInterval = setInterval(() => {
+                if (progress < 100) {
+                    progress += Math.random() * 5;
+                    if (progress > 100) progress = 100;
+                    progressBar.style.width = `${progress}%`;
+                    document.querySelector('.text-gray-600 span:last-child').textContent = `${Math.round(progress)}% complete`;
+                } else {
+                    clearInterval(progressInterval);
+                }
+            }, 2000);
+            
+            // Severity counters animation
+            const severityCounters = {
+                critical: 3,
+                high: 7,
+                medium: 12,
+                low: 5,
+                info: 18
+            };
+            
+            Object.keys(severityCounters).forEach(severity => {
+                let count = 0;
+                const counterElement = document.querySelector(`.${severity}-text.text-lg`);
+                const target = severityCounters[severity];
+                const interval = setInterval(() => {
+                    if (count < target) {
+                        count++;
+                        counterElement.textContent = count;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 1000 / target);
+            });
+        });
+    </script>
+</body>
+</html>
