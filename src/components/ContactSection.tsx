@@ -7,6 +7,8 @@ import { TypingEffect } from './TypingEffect';
 export const ContactSection: React.FC = () => {
   const [connectionStatus, setConnectionStatus] = useState<'idle' | 'connecting' | 'connected'>('idle');
   const [showTerminal, setShowTerminal] = useState(false);
+  const [terminalInput, setTerminalInput] = useState('');
+  const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
 
   const handleConnect = () => {
     setConnectionStatus('connecting');
@@ -14,6 +16,57 @@ export const ContactSection: React.FC = () => {
       setConnectionStatus('connected');
       setShowTerminal(true);
     }, 2000);
+  };
+
+  const executeCommand = (command: string) => {
+    const cmd = command.toLowerCase().trim();
+    setTerminalHistory(prev => [...prev, `guest@cyberport:~$ ${command}`]);
+    
+    switch (cmd) {
+      case 'github':
+        setTerminalHistory(prev => [...prev, 'Opening GitHub profile...']);
+        setTimeout(() => window.open('https://github.com', '_blank'), 500);
+        break;
+      case 'linkedin':
+        setTerminalHistory(prev => [...prev, 'Opening LinkedIn profile...']);
+        setTimeout(() => window.open('https://linkedin.com', '_blank'), 500);
+        break;
+      case 'email':
+        setTerminalHistory(prev => [...prev, 'Opening email client...']);
+        setTimeout(() => window.open('mailto:contact@cyberport.dev', '_blank'), 500);
+        break;
+      case 'discord':
+        setTerminalHistory(prev => [...prev, 'Opening Discord...']);
+        setTimeout(() => window.open('https://discord.com', '_blank'), 500);
+        break;
+      case 'help':
+      case 'connect --help':
+        setTerminalHistory(prev => [...prev, 
+          'Available commands:',
+          '  • github    - View open source projects',
+          '  • linkedin  - Professional profile', 
+          '  • email     - Direct message',
+          '  • discord   - Community chat',
+          '  • clear     - Clear terminal',
+          '  • konami    - Easter egg'
+        ]);
+        break;
+      case 'clear':
+        setTerminalHistory([]);
+        break;
+      case 'konami':
+        setTerminalHistory(prev => [...prev, '🎮 Konami code activated! Welcome to the matrix...']);
+        break;
+      default:
+        setTerminalHistory(prev => [...prev, `Command not found: ${cmd}. Type 'help' for available commands.`]);
+    }
+    setTerminalInput('');
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      executeCommand(terminalInput);
+    }
   };
 
   const contacts = [
@@ -168,7 +221,7 @@ export const ContactSection: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Easter egg terminal */}
+        {/* Interactive Terminal */}
         {showTerminal && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -176,20 +229,42 @@ export const ContactSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="terminal-border bg-terminal-bg p-6 rounded-lg"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="font-mono text-terminal-prompt">guest@cyberport:~$</span>
-              <span className="font-mono text-terminal-text">connect --help</span>
+            {/* Terminal History */}
+            <div className="font-mono text-terminal-text space-y-1 text-sm mb-4 min-h-[200px] max-h-[300px] overflow-y-auto">
+              <div className="text-cyber-cyan">Interactive Terminal - Type commands to navigate</div>
+              <div className="text-cyber-green">Type 'help' for available commands</div>
+              <div className="border-b border-cyber-cyan/30 my-2"></div>
+              
+              {terminalHistory.map((line, index) => (
+                <div key={index} className={
+                  line.startsWith('guest@cyberport') ? 'text-terminal-prompt' :
+                  line.includes('Opening') ? 'text-cyber-green' :
+                  line.includes('not found') ? 'text-destructive' :
+                  line.includes('🎮') ? 'text-cyber-pink' :
+                  'text-terminal-text'
+                }>
+                  {line}
+                </div>
+              ))}
             </div>
             
-            <div className="font-mono text-terminal-text space-y-2 text-sm">
-              <div className="text-cyber-cyan">Available commands:</div>
-              <div className="text-cyber-green">  • github    - View open source projects</div>
-              <div className="text-cyber-purple">  • linkedin  - Professional profile</div>
-              <div className="text-cyber-pink">  • email     - Direct message</div>
-              <div className="text-cyber-orange">  • discord   - Community chat</div>
-              <div className="mt-4 text-foreground">
-                Easter egg: Try typing "konami" for a surprise...
-              </div>
+            {/* Terminal Input */}
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-terminal-prompt">guest@cyberport:~$</span>
+              <input
+                type="text"
+                value={terminalInput}
+                onChange={(e) => setTerminalInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="flex-1 bg-transparent font-mono text-terminal-text border-none outline-none"
+                placeholder="Type a command..."
+                autoFocus
+              />
+              <span className="text-cyber-cyan animate-pulse">|</span>
+            </div>
+            
+            <div className="mt-4 text-xs text-muted-foreground font-mono">
+              Available: github, linkedin, email, discord, help, clear, konami
             </div>
           </motion.div>
         )}

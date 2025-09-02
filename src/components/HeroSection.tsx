@@ -5,6 +5,7 @@ import { CyberGrid } from './CyberGrid';
 import { Button } from './ui/button';
 import { ChevronDown } from 'lucide-react';
 import heroBackground from '@/assets/cyber-hero-bg.jpg';
+import profilePhoto from '@/assets/profile-photo.jpg';
 
 export const HeroSection: React.FC = () => {
   const [showTitle, setShowTitle] = useState(false);
@@ -58,21 +59,45 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="mb-6"
           >
-            {/* Name Section */}
+            {/* Photo and Name Section */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="mb-8"
+              className="mb-8 flex flex-col items-center gap-6"
             >
-              <div className="font-mono text-cyber-cyan text-lg md:text-xl mb-2">
-                &gt; Identifying user...
-              </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold glow-green mb-2">
-                ALEX CHEN
-              </h1>
-              <div className="font-mono text-cyber-purple text-sm md:text-base">
-                [USER_ID: 0x7A3F9C2E] [ACCESS_LEVEL: ROOT]
+              {/* Profile Photo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotateY: 180 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{ duration: 1.2, delay: 0.4 }}
+                className="relative"
+              >
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-cyber-cyan shadow-[0_0_40px_theme(colors.cyber.cyan)] overflow-hidden">
+                  <img 
+                    src={profilePhoto} 
+                    alt="Alex Chen - Software & Cybersecurity Engineer"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <motion.div 
+                  className="absolute inset-0 rounded-full border-4 border-cyber-green"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                />
+              </motion.div>
+
+              {/* Name and ID */}
+              <div className="text-center">
+                <div className="font-mono text-cyber-cyan text-lg md:text-xl mb-2">
+                  &gt; Identifying user...
+                </div>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold glow-green mb-2">
+                  ALEX CHEN
+                </h1>
+                <div className="font-mono text-cyber-purple text-sm md:text-base">
+                  [USER_ID: 0x7A3F9C2E] [ACCESS_LEVEL: ROOT]
+                </div>
               </div>
             </motion.div>
 
