@@ -18,6 +18,12 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Cyberpunk variants
+        cyber: "bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan hover:bg-cyber-cyan hover:text-background transition-all duration-300 hover:shadow-[0_0_20px_theme(colors.cyber.cyan)] hover:scale-105",
+        terminal: "bg-transparent text-terminal-text border border-terminal-border font-mono hover:bg-terminal-border/20 hover:shadow-[0_0_15px_theme(colors.terminal.border)] transition-all duration-300",
+        neon: "bg-cyber-purple/20 text-cyber-purple border border-cyber-purple hover:bg-cyber-purple hover:text-background transition-all duration-300 hover:shadow-[0_0_20px_theme(colors.cyber.purple)] hover:scale-105",
+        matrix: "bg-cyber-green/20 text-cyber-green border border-cyber-green hover:bg-cyber-green hover:text-background transition-all duration-300 hover:shadow-[0_0_20px_theme(colors.cyber.green)] hover:scale-105",
+        ghost_glow: "bg-transparent text-cyber-cyan hover:bg-cyber-cyan/10 hover:shadow-[0_0_15px_theme(colors.cyber.cyan)] border border-transparent hover:border-cyber-cyan transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",
