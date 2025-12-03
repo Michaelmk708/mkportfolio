@@ -3,39 +3,86 @@ import { motion } from 'framer-motion';
 import { Terminal, Shield, Code, Zap } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
-  const skills = [
-    { name: 'React/Next.js', level: 95, color: 'cyber-cyan' },
-    { name: 'Django/Python', level: 92, color: 'cyber-green' },
-    { name: 'Solidity/Web3', level: 88, color: 'cyber-purple' },
-    { name: 'Rust/ICP', level: 85, color: 'cyber-pink' },
-    { name: 'Cybersecurity', level: 90, color: 'cyber-orange' },
-    { name: 'UI/UX Design', level: 87, color: 'cyber-cyan' },
-    { name: 'Databases (SQL/NoSQL)', level: 89, color: 'cyber-green' }
+  const skillCategories = [
+    {
+      category: 'Frontend Frameworks',
+      color: 'cyber-cyan',
+      skills: [
+        { name: 'React', level: 90, status: 'proficient' },
+        { name: 'Next.js', level: 85, status: 'proficient' }
+      ]
+    },
+    {
+      category: 'Backend Frameworks',
+      color: 'cyber-green',
+      skills: [
+        { name: 'Django', level: 90, status: 'proficient' },
+        { name: 'REST APIs', level: 88, status: 'proficient' },
+        { name: 'Node.js/Express', level: 60, status: 'learning' }
+      ]
+    },
+    {
+      category: 'Web3 & Blockchain',
+      color: 'cyber-purple',
+      skills: [
+        { name: 'Solana', level: 85, status: 'proficient' },
+        { name: 'ICP', level: 85, status: 'proficient' },
+        { name: 'Ethereum', level: 55, status: 'learning' }
+      ]
+    },
+    {
+      category: 'Cybersecurity',
+      color: 'cyber-pink',
+      skills: [
+        { name: 'Secure Coding', level: 88, status: 'proficient' },
+        { name: 'Web Application Testing', level: 85, status: 'proficient' },
+        { name: 'Web3 Security', level: 60, status: 'learning' },
+        { name: 'Cryptography', level: 58, status: 'learning' }
+      ]
+    },
+    {
+      category: 'Databases',
+      color: 'cyber-orange',
+      skills: [
+        { name: 'SQL', level: 90, status: 'proficient' },
+        { name: 'PostgreSQL', level: 88, status: 'proficient' },
+        { name: 'MongoDB', level: 55, status: 'learning' }
+      ]
+    },
+    {
+      category: 'Programming Languages',
+      color: 'cyber-cyan',
+      skills: [
+        { name: 'Python', level: 92, status: 'proficient' },
+        { name: 'JavaScript', level: 90, status: 'proficient' },
+        { name: 'Rust', level: 85, status: 'proficient' }
+      ]
+    }
   ];
 
   const expertise = [
     {
       icon: Code,
-      title: 'Full-Stack Development',
-      description: 'React, Django, Node.js, TypeScript',
+      title: 'Frontend Development',
+      description: 'React, Next.js, TypeScript, Modern UI/UX',
       color: 'cyber-cyan'
     },
     {
-      icon: Shield,
-      title: 'Cybersecurity',
-      description: 'Penetration Testing, Security Audits, OWASP',
+      icon: Terminal,
+      title: 'Backend Development',
+      description: 'Django, REST APIs, PostgreSQL, Node.js',
       color: 'cyber-green'
     },
     {
       icon: Zap,
-      title: 'Blockchain & Web3',
-      description: 'Ethereum, Solana, ICP, Smart Contracts',
+      title: 'Web3 & Blockchain',
+      description: 'Solana, ICP, Smart Contracts, Ethereum',
       color: 'cyber-purple'
     },
     {
-      icon: Terminal,
-      title: 'DevOps & Infrastructure',
-      description: 'Docker, Kubernetes, CI/CD, AWS',
+      icon: Shield,
+      title: 'Cybersecurity',
+      description: 'Secure Coding, Web Testing, Security Audits',
       color: 'cyber-pink'
     }
   ];
@@ -66,7 +113,7 @@ export const AboutSection: React.FC = () => {
             
             <div className="font-mono text-terminal-text space-y-2">
               <div className="text-cyber-cyan">USER: Software & Cybersecurity Engineer</div>
-              <div className="text-cyber-green">ROLE: Full-Stack Developer | Security Specialist</div>
+              <div className="text-cyber-green">ROLE: software Developer | Security Specialist</div>
               <div className="text-cyber-purple">SPECIALIZATION: Web2 | Web3 | Blockchain | UI/UX</div>
               <div className="text-cyber-pink">LOCATION: Nyeri</div>
               <div className="text-cyber-orange">STATUS: Available for projects</div>
@@ -108,7 +155,7 @@ export const AboutSection: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Skills radar */}
+        {/* Skills matrix */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,37 +167,74 @@ export const AboutSection: React.FC = () => {
             SKILL_MATRIX.exe
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {skills.map((skill, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {skillCategories.map((category, catIndex) => (
               <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                key={category.category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: catIndex * 0.1 }}
                 viewport={{ once: true }}
-                className="space-y-2"
+                className="space-y-4"
               >
-                <div className="flex justify-between items-center">
-                  <span className={`text-${skill.color} font-mono font-medium`}>
-                    {skill.name}
-                  </span>
-                  <span className="text-terminal-text font-mono text-sm">
-                    {skill.level}%
-                  </span>
-                </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
-                    viewport={{ once: true }}
-                    className={`h-full bg-${skill.color} rounded-full shadow-[0_0_15px_currentColor] relative`}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 rounded-full" />
-                  </motion.div>
+                <h4 className={`text-${category.color} font-mono font-bold text-lg border-b border-${category.color}/30 pb-2`}>
+                  {category.category}
+                </h4>
+                
+                <div className="space-y-3">
+                  {category.skills.map((skill, index) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: catIndex * 0.1 + index * 0.05 }}
+                      viewport={{ once: true }}
+                      className="space-y-1"
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="text-foreground font-mono text-sm flex items-center gap-2">
+                          {skill.name}
+                          {skill.status === 'learning' && (
+                            <span className="text-cyber-orange text-xs px-2 py-0.5 rounded-full border border-cyber-orange/30 bg-cyber-orange/10">
+                              Learning
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-terminal-text font-mono text-xs">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          transition={{ duration: 1, delay: catIndex * 0.1 + index * 0.05 + 0.3 }}
+                          viewport={{ once: true }}
+                          className={`h-full bg-${category.color} rounded-full shadow-[0_0_10px_currentColor] relative`}
+                          style={{
+                            opacity: skill.status === 'learning' ? 0.7 : 1
+                          }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 rounded-full" />
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Legend */}
+          <div className="mt-8 pt-6 border-t border-border flex items-center justify-center gap-6 text-sm font-mono">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-cyber-cyan"></div>
+              <span className="text-muted-foreground">Proficient (80%+)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-cyber-orange/70"></div>
+              <span className="text-muted-foreground">Learning (50-70%)</span>
+            </div>
           </div>
         </motion.div>
       </div>

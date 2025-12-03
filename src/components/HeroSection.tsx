@@ -109,12 +109,12 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="glow-cyan block mb-2">FULLSTACK</span>
+                <span className="glow-cyan block mb-2">SOFTWARE</span>
                 <span className="glow-purple">DEVELOPER</span>
               </h2>
               <div className="glow-green text-xl md:text-2xl lg:text-3xl font-mono">
                 <TypingEffect 
-                  text="Full-Stack Dev | Web3 Architect | Security Enthusiast"
+                  text="Software Dev | Web3 Architect | Security Enthusiast"
                   speed={100}
                   onComplete={() => setShowSubtitle(true)}
                 />
@@ -133,7 +133,7 @@ export const HeroSection: React.FC = () => {
           >
             <div className="text-cyber-cyan text-lg md:text-xl font-mono">
               <TypingEffect 
-                text="Web3 | Full-stack | Security | UI/UX"
+                text="Web3 | Web2 | Security | UI/UX"
                 speed={80}
                 onComplete={() => setShowButtons(true)}
               />
