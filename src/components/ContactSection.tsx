@@ -80,7 +80,7 @@ export const ContactSection: React.FC = () => {
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://www.linkedin.com/in/michaelmk708',
+      url: 'https://www.linkedin.com/in/michaelkinuthia708',
       description: 'Professional network',
       color: 'cyber-cyan'
     },
