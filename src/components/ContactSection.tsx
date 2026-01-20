@@ -29,7 +29,7 @@ export const ContactSection: React.FC = () => {
         break;
       case 'linkedin':
         setTerminalHistory(prev => [...prev, 'Opening LinkedIn profile...']);
-        setTimeout(() => window.open('https://www.linkedin.com/in/michaelmk708', '_blank'), 500);
+        setTimeout(() => window.open('https://www.linkedin.com/in/michaelkinuthia708', '_blank'), 500);
         break;
       case 'email':
         setTerminalHistory(prev => [...prev, 'Opening email client...']);
