@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Lock, Zap, Shield, Code } from 'lucide-react';
+import { ExternalLink, Github, Lock, Zap, Shield, Code, Terminal } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface Project {
@@ -18,9 +18,51 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'PersonaPulse – Decentralized Identity & Reputation Platform',
-    description: 'A Web3 platform on the Internet Computer that empowers users to own their identity, manage verified profiles, and build trusted reputations across ecosystems.',
-    tech: ['React', 'Web3.js', 'ICP', 'rust'],
+    title: 'Arcadia',
+    description: 'An offline-first, secure mesh messenger leveraging Bluetooth for peer-to-peer connectivity. Features AES-256 encryption and mesh relays for an underground, decentralized communication network.',
+    tech: ['Rust', 'Bluetooth Mesh', 'AES-256', 'P2P'],
+    category: 'Security Tools',
+    status: 'encrypted',
+    icon: Shield,
+    githubUrl: 'https://github.com/Michaelmk708/chatapp',
+    liveUrl: 'https://chatapparcadia.netlify.app/'
+  },
+  {
+    id: 2,
+    title: 'Terminus',
+    description: 'A decentralized digital inheritance protocol. Ranked in the top 30 globally and winner of the dev3pack challenge.',
+    tech: ['Rust', 'Solana', 'Anchor', 'Smart Contracts'],
+    category: 'Smart Contracts',
+    status: 'encrypted',
+    icon: Lock,
+    githubUrl: 'https://github.com/Michaelmk708/teminus-inheritance',
+    liveUrl: 'https://termnus.netlify.app/'
+  },
+  {
+    id: 3,
+    title: 'TerraYield',
+    description: 'A machine learning application providing precise crop yield predictions based on agricultural data models.',
+    tech: ['Python', 'Machine Learning', 'React'],
+    category: 'Full-Stack Apps',
+    status: 'encrypted',
+    icon: Zap,
+    liveUrl: 'https://terrayieldpredictor.netlify.app/'
+  },
+  {
+    id: 4,
+    title: 'Oxirast CLI (v1.0.3)',
+    description: 'A fine-grained WebAssembly frontend framework for Rust, streamlining the compilation and deployment pipeline for Wasm components.',
+    tech: ['Rust', 'WebAssembly', 'CLI'],
+    category: 'Full-Stack Apps',
+    status: 'encrypted',
+    icon: Terminal,
+    githubUrl: 'https://crates.io/crates/oxirast-cli'
+  },
+  {
+    id: 5,
+    title: 'PortablePersona',
+    description: 'A decentralized identity platform on the Internet Computer (ICP) that empowers users to manage verified profiles across ecosystems.',
+    tech: ['React', 'ICP', 'Rust'],
     category: 'Web3 dApps',
     status: 'encrypted',
     icon: Zap,
@@ -28,59 +70,15 @@ const projects: Project[] = [
     liveUrl: 'https://personaportable.netlify.app/'
   },
   {
-    id: 2,
-    title: ' Arcadia: A Secure Messenger',
-    description: 'A proof-of-concept for end-to-end encrypted chat, demonstrating the power of Rust for robust backend logic and React for a responsive user interface.',
-    tech: ['React', 'Rust', 'JavaScript', 'Web Crypto API'],
-    category: 'Web3 dApps',
-    status: 'encrypted',
-    icon: Shield,
-    githubUrl: 'https://github.com/Michaelmk708/chatapp',
-    liveUrl: 'https://chatapparcadia.netlify.app/'
-  },
-  {
-    id: 5,
-    title: 'E-commerce Dashboard',
-    description: 'A comprehensive e-commerce dashboard with real-time analytics, inventory management, and customer insights.',
-    tech: ['React', 'Node.js', 'MongoDB'],
+    id: 6,
+    title: 'Lovebox',
+    description: 'A secure, interactive full-stack application leveraging modern backend infrastructure to connect users seamlessly.',
+    tech: ['TypeScript', 'React', 'Node.js'],
     category: 'Full-Stack Apps',
     status: 'encrypted',
     icon: Code,
-    githubUrl: 'https://github.com/Michaelmk708/ecommerce',
-    liveUrl: '/assets/eshop.html'
-  },
-  {
-    id: 6,
-    title: 'Vulnerability Scanner',
-    description: 'A web application vulnerability scanner that identifies common security issues in websites and web apps.',
-    tech: ['Python', 'Django', 'Security'],
-    category: 'Security Tools',
-    status: 'encrypted',
-    icon: Shield,
-    githubUrl: 'https://github.com/Michaelmk708/security',
-    liveUrl: '/assets/security.html'
-  },
-  {
-    id: 7,
-    title: 'Fitness App Design',
-    description: 'A modern fitness application design with workout tracking, nutrition planning, and community features.',
-    tech: ['Figma', 'Adobe XD', 'Prototyping'],
-    category: 'UI/UX Design',
-    status: 'encrypted',
-    icon: Zap,
-    githubUrl: 'https://github.com/Michaelmk708/fitness',
-    liveUrl: '/assets/fitness.html'
-  },
-  {
-    id: 8,
-    title: 'Banking App Redesign',
-    description: 'A complete redesign of a banking mobile application focusing on usability and modern aesthetics.',
-    tech: ['Figma', 'User Research', 'Prototyping'],
-    category: 'UI/UX Design',
-    status: 'encrypted',
-    icon: Zap,
-    githubUrl: 'https://github.com/Michaelmk708/banking',
-    liveUrl: '/assets/banking.html'
+    githubUrl: 'https://github.com/Michaelmk708/lovebox',
+    liveUrl: 'https://lovebox.co.ke/'
   }
 ];
 

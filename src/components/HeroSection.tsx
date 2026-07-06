@@ -76,7 +76,7 @@ export const HeroSection: React.FC = () => {
                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-cyber-cyan shadow-[0_0_40px_theme(colors.cyber.cyan)] overflow-hidden">
                   <img 
                     src={profilePhoto} 
-                    alt="michael kinuthia - Software & Cybersecurity Engineer"
+                    alt="Michael Kinuthia - Systems Engineer & Web3 Architect"
                     className="w-full h-full object-cover"
                     style={{ objectPosition: 'left center' }}
                   />
@@ -109,12 +109,12 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="glow-cyan block mb-2">SOFTWARE</span>
-                <span className="glow-purple">DEVELOPER</span>
+                <span className="glow-cyan block mb-2">SYSTEMS</span>
+                <span className="glow-purple">ENGINEER</span>
               </h2>
               <div className="glow-green text-xl md:text-2xl lg:text-3xl font-mono">
                 <TypingEffect 
-                  text="Software Dev | Web3 Architect | Security Enthusiast"
+                  text="Rust Developer | Web3 Architect | Security Auditor"
                   speed={100}
                   onComplete={() => setShowSubtitle(true)}
                 />

@@ -5,85 +5,68 @@ import { Terminal, Shield, Code, Zap } from 'lucide-react';
 export const AboutSection: React.FC = () => {
   const skillCategories = [
     {
-      category: 'Frontend Frameworks',
-      color: 'cyber-cyan',
-      skills: [
-        { name: 'React', level: 90, status: 'proficient' },
-        { name: 'Next.js', level: 85, status: 'proficient' }
-      ]
-    },
-    {
-      category: 'Backend Frameworks',
-      color: 'cyber-green',
-      skills: [
-        { name: 'Django', level: 90, status: 'proficient' },
-        { name: 'REST APIs', level: 88, status: 'proficient' },
-        { name: 'Node.js/Express', level: 60, status: 'learning' }
-      ]
-    },
-    {
-      category: 'Web3 & Blockchain',
+      category: 'Systems & Web3',
       color: 'cyber-purple',
       skills: [
-        { name: 'Solana', level: 85, status: 'proficient' },
+        { name: 'Rust', level: 92, status: 'proficient' },
+        { name: 'Solana (SVM) / Anchor', level: 88, status: 'proficient' },
         { name: 'ICP', level: 85, status: 'proficient' },
-        { name: 'Ethereum', level: 55, status: 'learning' }
+        { name: 'WebAssembly', level: 80, status: 'proficient' }
       ]
     },
     {
       category: 'Cybersecurity',
       color: 'cyber-pink',
       skills: [
-        { name: 'Secure Coding', level: 88, status: 'proficient' },
-        { name: 'Web Application Testing', level: 85, status: 'proficient' },
-        { name: 'Web3 Security', level: 60, status: 'learning' },
-        { name: 'Cryptography', level: 58, status: 'learning' }
+        { name: 'Penetration Testing', level: 90, status: 'proficient' },
+        { name: 'Web3 Security Auditing', level: 88, status: 'proficient' },
+        { name: 'Ethical Hacking', level: 85, status: 'proficient' },
+        { name: 'Cryptography', level: 80, status: 'proficient' }
       ]
     },
     {
-      category: 'Databases',
-      color: 'cyber-orange',
-      skills: [
-        { name: 'SQL', level: 90, status: 'proficient' },
-        { name: 'PostgreSQL', level: 88, status: 'proficient' },
-        { name: 'MongoDB', level: 55, status: 'learning' }
-      ]
-    },
-    {
-      category: 'Programming Languages',
-      color: 'cyber-cyan',
+      category: 'Backend & Data',
+      color: 'cyber-green',
       skills: [
         { name: 'Python', level: 92, status: 'proficient' },
-        { name: 'JavaScript', level: 90, status: 'proficient' },
-        { name: 'Rust', level: 85, status: 'proficient' }
+        { name: 'Django', level: 85, status: 'proficient' },
+        { name: 'Machine Learning', level: 75, status: 'learning' }
+      ]
+    },
+    {
+      category: 'Frontend Frameworks',
+      color: 'cyber-cyan',
+      skills: [
+        { name: 'React', level: 90, status: 'proficient' },
+        { name: 'TypeScript', level: 85, status: 'proficient' }
       ]
     }
   ];
 
   const expertise = [
     {
-      icon: Code,
-      title: 'Frontend Development',
-      description: 'React, Next.js, TypeScript, Modern UI/UX',
-      color: 'cyber-cyan'
-    },
-    {
       icon: Terminal,
-      title: 'Backend Development',
-      description: 'Django, REST APIs, PostgreSQL, Node.js',
-      color: 'cyber-green'
+      title: 'Systems Engineering',
+      description: 'Rust, WebAssembly, CLI Tooling, Low-Level Architecture',
+      color: 'cyber-cyan'
     },
     {
       icon: Zap,
       title: 'Web3 & Blockchain',
-      description: 'Solana, ICP, Smart Contracts, Ethereum',
+      description: 'Solana, ICP, Smart Contracts, Digital Identity',
       color: 'cyber-purple'
     },
     {
       icon: Shield,
       title: 'Cybersecurity',
-      description: 'Secure Coding, Web Testing, Security Audits',
+      description: 'Penetration Testing, Web3 Auditing, Protocol Security',
       color: 'cyber-pink'
+    },
+    {
+      icon: Code,
+      title: 'Full-Stack Integration',
+      description: 'Python, React, Machine Learning, API Development',
+      color: 'cyber-green'
     }
   ];
 
@@ -112,15 +95,15 @@ export const AboutSection: React.FC = () => {
             </div>
             
             <div className="font-mono text-terminal-text space-y-2">
-              <div className="text-cyber-cyan">USER: Software & Cybersecurity Engineer</div>
-              <div className="text-cyber-green">ROLE: software Developer | Security Specialist</div>
-              <div className="text-cyber-purple">SPECIALIZATION: Web2 | Web3 | Blockchain | UI/UX</div>
-              <div className="text-cyber-pink">LOCATION: Nyeri</div>
-              <div className="text-cyber-orange">STATUS: Available for projects</div>
+              <div className="text-cyber-cyan">USER: Systems Engineer & Web3 Architect</div>
+              <div className="text-cyber-green">ROLE: Software Developer | Security Auditor</div>
+              <div className="text-cyber-purple">SPECIALIZATION: Rust | Solana SVM | ICP | Penetration Testing</div>
+              <div className="text-cyber-pink">LOCATION: Nyeri, Kenya</div>
+              <div className="text-cyber-orange">STATUS: Building and Engineering</div>
               <div className="mt-4 text-foreground">
-                Passionate about building secure, scalable applications that bridge the gap between 
-                traditional web development and the decentralized future. Expert in penetration testing, 
-                smart contract auditing, and creating beautiful user experiences.
+                Passionate about engineering secure, high-performance systems that bridge the gap between 
+                traditional web infrastructure and the decentralized future. Expert in Rust, smart contract 
+                architecture, and penetration testing, with a strong focus on building robust, scalable solutions.
               </div>
             </div>
           </div>
