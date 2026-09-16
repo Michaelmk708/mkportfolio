@@ -278,10 +278,10 @@ export const ContactSection: React.FC = () => {
           className="text-center mt-16 pt-8 border-t border-cyber-cyan/30"
         >
           <p className="text-muted-foreground font-mono text-sm">
-            © 2025 mkportfolio. All rights reserved. | Built with React + Three.js
+            © 2026 michael portfolio. All rights reserved.
           </p>
           <p className="text-cyber-cyan font-mono text-xs mt-2">
-            "Crafting the future of Web & Web3"
+            "Crafting the future of Web2 & Web3"
           </p>
         </motion.div>
       </div>

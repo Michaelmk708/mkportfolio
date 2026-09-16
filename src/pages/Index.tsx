@@ -39,7 +39,7 @@ const Index = () => {
         <div className="bg-terminal-bg border border-cyber-cyan rounded-lg p-3 animate-pulse-glow">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-cyber-green animate-pulse"></div>
-            <span className="font-mono text-xs text-cyber-green">SYSTEM ONLINE</span>
+            <span className="font-mono text-xs text-cyber-green">SYSTEM ENGINEER</span>
           </div>
         </div>
       </div>
